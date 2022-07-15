@@ -50,6 +50,12 @@ class ApplicationController < Sinatra::Base
     score_total.to_json
   end
 
+  delete "/score_totals/:id" do
+    score_total = ScoreTotal.find(params[:id])
+    score_total.destroy
+    score_total.to_json
+  end
+
   
 
 end
