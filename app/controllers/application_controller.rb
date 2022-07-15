@@ -11,9 +11,10 @@ class ApplicationController < Sinatra::Base
     player.to_json(inlcude: :score_totals)
   end
 
-  get "players/:id" do
+  delete "/players/:id" do
     player = Player.find(params[:id])
-    player.to_json(include: :score_totals)
+    player.destroy
+    player.to_json
   end
 
   get "/rounds" do
@@ -38,6 +39,7 @@ class ApplicationController < Sinatra::Base
     else
        new_player = search
     end
+
     score_total = ScoreTotal.create(
       course_name: params[:course_name],
       round_date: params[:round_date],
